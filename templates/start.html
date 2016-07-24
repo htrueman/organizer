@@ -1,0 +1,25 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organize your life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet"
+        href="{{ PORTAL_URL }}{% static "css/main.css" %}">
+</head>
+<body>
+ <div class="row" id="hello_header">
+    <div class="col-xs-12">
+    <h1>Hello, here you can Organize! your life.</h1>
+        {% if user.is_authenticated %}
+             <a href="{% url 'login' %}">Go on</a>
+        {% else %}
+            <a href="{% url 'social:begin' 'vk-oauth2' %}?next={{ request.path }}">Log in via vk.com</a>
+        {% endif %}
+    </div>
+</div>
+</body>

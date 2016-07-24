@@ -1,0 +1,69 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organize your life</title>
+    <meta name="description" value="Organize your life" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.0.0/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet"
+        href="{{ PORTAL_URL }}{% static "css/main.css" %}">
+    {% csrf_token %}
+</head>
+<body>
+<style>
+    body {background-image: url("{% static "img/bg-11-full.jpg" %}");}
+</style>
+<!-- Start header -->
+<div class="row" id="header">
+ <div class="col-xs-6">
+<h1>Organize!</h1>
+</div>
+</div>
+<!-- End Header -->
+    {% if user.is_authenticated %}
+    <a href="{% url 'users:auth_logout' %}" style="margin-top: 30px; text-align: right;">Log out</a>
+    {% else %}
+    <a href="{% url 'social:begin' 'vk-oauth2' %}?next={{ request.path }}">Log in via vk.com</a>
+    {% endif %}
+    <div class="col-xs-8" id="content-column">
+    {% if user.is_authenticated %}
+        {% block content %}{% endblock content %}
+    {% else %}
+        <div class="row" id="anon_user">
+        Please log in
+        </div>
+    {% endif %}
+    </div>
+   <div class="row" id="footer">
+      <div class="col-xs-6">
+        &copy; Organize!
+      </div>
+    </div>
+
+<!-- Modal Boilerplate -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><!-- --></h4>
+            </div>
+            <div class="modal-body"><!-- --></div>
+            <div class="modal-footer"><!-- --></div>
+        </div>
+    </div>
+</div>
+
+<!-- Javascripts Inclusion -->
+<script type="text/javascript" src="{% static "js/jquery-3.1.0.min.js" %}"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="{% static "js/main.js" %}"></script>
+</body>
+</html>

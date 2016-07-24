@@ -1,0 +1,33 @@
+#footer {
+    margin-left: 200px;
+}
+#header {
+    margin-left: 50px;
+}
+
+#anon_user {
+    margin-left: 50px;
+}
+
+#hello_header {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+}
+
+.task_link {
+    background:none!important;
+     border:none;
+     padding:0!important;
+     font: inherit;
+     /*border is optional*/
+     cursor: pointer;
+}
+
+.c_table {
+     margin-top: 50px;
+}
+

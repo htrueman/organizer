@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="{% url "delete_task" object.id %}" method="post">
+    {% csrf_token %}
+    <p>Delete "{{ object }}"?</p>
+    <input type="submit" value="Yes" name="delete_button" class="btn btn-danger" />
+    <input type="submit" value="NO" name="cancel_button" class="btn btn-default" /><br /><br />
+</form>
+{% endblock %}

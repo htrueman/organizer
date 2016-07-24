@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+     {% csrf_token %}
+
+    <table class="table">
+    <thead>
+    <tr>
+        <th>
+            Planned
+        </th>
+        <th>
+            Mark if task is already done
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+    <tr>
+        <td>
+            <div class="content">
+            <a href="{% url 'edit_task' task.id %}" class="edit-form-link" style="color: #99ff32">{{ task.task_content}}</a>
+            <a href="{% url 'delete_task' task.id %}" style="color: #CC0000">Delete</a>
+            </div>
+        </td>
+        <td>
+        <div class="task_box">
+          <label class="btn btn-primary">
+            <input type="checkbox" autocomplete="off" name="checkbox" id="{{ forloop.counter }}" class="task" data-task-id="{{ task.id }}"
+                    {% if task.checkbox == True %} checked="checked"{% endif %}/> DONE
+          </label>
+        </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+
+    <div class="add_task_button">
+    <a href="{% url 'add_task' %}" class="btn btn-primary">One more task...</a>
+    </div>
+    <div class="c_table">
+    <div class="col-xs-6">
+    <table class="table">
+    <thead>
+    <tr>
+        <th>
+            Completed
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for c_task in c_tasks %}
+    <tr>
+        <td>
+            {{ c_task.c_task_content }}
+        </td>
+    </tr>
+    {% endfor%}
+    </tbody>
+    </table>
+    </div>
+    </div>
+{% endblock content %}
